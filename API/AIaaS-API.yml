@@ -1,0 +1,69 @@
+openapi: '3.0.2'
+info:
+  title: Artificial Intelligence as a Service (AIaaS) API
+  version: '0.1'
+servers:
+  - url: http://x570-test.local:8080/api/v1/
+  - url: http://localhost:8080/api/v1/
+paths:
+  /images/classify:
+    post:
+      parameters:
+        - in: query
+          name: model
+          schema:
+            type: string
+          required: true
+          description: Model name
+          example: resnet50
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageClassifyResponse'
+        '500':
+          description: ERROR
+components:
+  schemas:
+    ImageClassifyResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            results:
+              description: List of results
+              type: array
+              items:
+                $ref: '#/components/schemas/ImageClassifyItem'
+
+    ImageClassifyItem:
+      type: object
+      properties:
+        class:
+          type: string
+          example: "coral"
+          description: Result class.
+        score:
+          type: number
+          example: 0.98
+          description: Result confidence/score.
+        idx:
+          type: number
+          example: 213
+          description: Result class index.
+
+
+
