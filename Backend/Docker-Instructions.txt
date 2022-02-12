@@ -1,0 +1,20 @@
+# Java Install
+```
+sudo apt-get update
+sudo apt-get install -y openjdk-11-jdk
+```
+
+
+# MicroApps Build
+```
+cd /workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps
+
+./build.sh
+./build.sh "-D VITIS_DUMMY_RESULTS"
+```
+
+
+# API Server
+```
+java -jar /workspace/vitis-aiaas-0.0.1-SNAPSHOT.jar
+```
