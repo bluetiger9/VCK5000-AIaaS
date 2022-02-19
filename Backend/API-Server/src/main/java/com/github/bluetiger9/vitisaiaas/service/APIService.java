@@ -2,6 +2,8 @@ package com.github.bluetiger9.vitisaiaas.service;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +30,29 @@ public class APIService {
             log.info("Image path: {}", tempImagePath.toAbsolutePath());
             imageFile.transferTo(tempImagePath);
 
-            final Object result = imageClassificationService.classifyImage(tempImagePath, model);
+            final Object result = imageClassificationService.classifyImage(model, tempImagePath);
+            return new GenericResponse(result);
+
+        } catch (IOException e) {
+            throw new RuntimeException("I/O error occurred", e);
+        }
+    }
+
+    public GenericResponse classifyImagesBatch(MultipartFile[] imageFiles, String model) {
+        try (var tempDir = TempUtils.tempDirResource()) {
+            log.info("Temp dir: {}", tempDir.getPath());
+
+            final List<Path> tempImagePaths = new ArrayList<>();
+            for (var imageFile : imageFiles) {
+                final String normalizedFileName = getFilenameWithoutExtension(imageFile).replaceAll("[^a-zA-Z0-9_-]", "_");
+                final Path tempImagePath = tempDir.getPath().resolve(normalizedFileName + "." + getFileExtension(imageFile, "jpg"));
+                log.info("Image path: {}", tempImagePath.toAbsolutePath());
+
+                imageFile.transferTo(tempImagePath);
+                tempImagePaths.add(tempImagePath);
+            }
+
+            final Object result = imageClassificationService.classifyImagesBatch(model, tempImagePaths);
             return new GenericResponse(result);
 
         } catch (IOException e) {
@@ -48,5 +72,11 @@ public class APIService {
         } catch (Exception e) {
             return defaultValue;
         }
+    }
+
+    private static String getFilenameWithoutExtension(MultipartFile imageFile) {
+        final String name = imageFile.getOriginalFilename();
+        final String extension = getFileExtension(imageFile, "");
+        return name.substring(0, name.length() - (extension.isBlank() ? 0 : extension.length() + 1));
     }
 }

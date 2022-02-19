@@ -25,7 +25,6 @@ paths:
                 image:
                   type: string
                   format: binary
-
       responses:
         '200':
           description: OK
@@ -33,6 +32,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ImageClassifyResponse'
+        '500':
+          description: ERROR
+  /images/classify/batch:
+    post:
+      parameters:
+        - in: query
+          name: model
+          schema:
+            type: string
+          required: true
+          description: Model name
+          example: resnet50
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                images:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBatchClassifyResponse'
         '500':
           description: ERROR
 components:
@@ -48,7 +77,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ImageClassifyItem'
-
     ImageClassifyItem:
       type: object
       properties:
@@ -64,6 +92,29 @@ components:
           type: number
           example: 213
           description: Result class index.
-
+    ImageBatchClassifyResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            results:
+              description: List of results
+              type: array
+              items:
+                $ref: '#/components/schemas/ImageBatchClassifyItem'
+    ImageBatchClassifyItem:
+      type: object
+      properties:
+        image:
+          type: string
+          example: "sample_classify.jpg"
+          description: Source image.
+        results:        
+          description: List of results
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageClassifyItem'
+        
 
 

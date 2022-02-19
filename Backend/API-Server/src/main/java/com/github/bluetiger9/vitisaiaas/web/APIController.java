@@ -24,10 +24,18 @@ public class APIController {
 
     @PostMapping("/images/classify")
     @ResponseBody
-    public GenericResponse classifyImage(@RequestParam("image") MultipartFile imageFile, @RequestParam("model") String model) {
+    public GenericResponse classifyImage(@RequestParam("model") String model, @RequestParam("image") MultipartFile imageFile) {
         log.info("Received image classify request: model={} image={}", model, imageFile.getOriginalFilename());
         return apiService.classifyImage(imageFile, model);
     }
+
+    @PostMapping("/images/classify/batch")
+    @ResponseBody
+    public GenericResponse classifyImage(@RequestParam("model") String model, @RequestParam("images") MultipartFile[] imageFiles) {
+        log.info("Received image classify request: model={} image={}", model, imageFiles);
+        return apiService.classifyImagesBatch(imageFiles, model);
+    }
+
 
     @GetMapping("/dummy")
     @ResponseBody
