@@ -1,0 +1,85 @@
+@import url("https://unpkg.com/primer/build/build.css");
+
+body {
+    background-color: #dddddd;
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+    color: #770000
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+#title-box, #task-list-box, #task-details-box, #server-info-box {
+    margin: 0.3em;      
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#task-list-box, #task-details-box, #server-info-box {
+    padding: 0.5em;
+    background-color: white;
+}
+
+#title-box, #task-list-box {
+    flex-wrap: wrap;
+}
+
+#task-details-box {
+    flex: 0 0 65%;
+    box-sizing: border-box;
+}
+
+#server-info-box {
+    flex: 1 0;
+    box-sizing: border-box;
+}
+
+p {
+    display: block;
+    /*flex-direction: row;*/
+}
+
+li {
+    margin-left: 5mm;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+h3 {
+    font-size: 1em;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+tr {
+    text-align: center;
+    height: 2em;
+}
+
+.task-list-selected {
+    font-weight: bold;
+}

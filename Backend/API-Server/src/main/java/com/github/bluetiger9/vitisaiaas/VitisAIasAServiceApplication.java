@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class })
 public class VitisAIasAServiceApplication {
 
+    public static final long startTime = System.currentTimeMillis();
+
 	public static void main(String[] args) {
 		SpringApplication.run(VitisAIasAServiceApplication.class, args);
 	}

@@ -110,11 +110,11 @@ components:
           type: string
           example: "sample_classify.jpg"
           description: Source image.
-        results:        
+        results:
           description: List of results
           type: array
           items:
             $ref: '#/components/schemas/ImageClassifyItem'
-        
+
 
 

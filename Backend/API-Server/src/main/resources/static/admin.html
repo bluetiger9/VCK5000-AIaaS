@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Artificial Intelligence as a Service (AIaaS) Server</title>
+    <meta name="description" content="Artificial Intelligence as a Service (AIaaS) Server">
+    <meta name="author" content="Attila T.">
+    <meta name="viewport" content="width=800">
+
+    <meta property="og:title" content="rtificial Intelligence as a Service (AIaaS) Server">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="admin.css">
+    <script src="admin.js" defer></script>
+</head>
+
+<body>
+    <div id="title-box">
+        <h1>Artificial Intelligence as a Service (AIaaS) Server</h1>
+    </div>
+    
+    <div id="task-list-box">
+        <h2>Task History</h2>
+        <table id="task-list">
+            <tr id="task-list-header-row">
+                <th>ID</th>
+                <th>TYPE</th>
+                <th>STATE</th>
+                <th>ATTRIBUTES</th>                
+                <th>CREATED AT</th>
+                <th>FINISHED AT</th>
+                <th>DURATION</th>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="flex-row flex-wrap">
+        <div id="task-details-box">
+            <h2>Task Details</h2>
+            <p></p>
+            <p><b>Id: </b><span id="task-details-id"></span></p>
+            <p><b>Type: </b><span id="task-details-type"></span></p>
+            <p><b>State: </b><span id="task-details-state"></span></p>
+            <p><b>Attributes: </b><span id="task-details-attr"></span></p>
+            <p><b>Created At: </b><span id="task-details-created"></span></p>
+            <p><b>Finished At: </b><span id="task-details-finished"></span></p>
+            <p><b>Duration: </b><span id="task-details-duration"></span></p>
+            <p><b>Details: </b><span id="task-details-details"></span></p>
+        </div>
+
+        <div id="server-info-box">
+            <h2>Server Info</h2>
+            <p></p>
+            <p><b>Name: </b><span id="server-info-name"></span></p>
+            <p><b>Version: </b><span id="server-info-version"></span></p>
+            <p><b>Uptime: </b><span id="server-info-uptime"></span></p>
+            <p><b>Host: </b><span id="server-info-host"></span></p>
+            <p><b>User: </b><span id="server-info-user"></span></p>
+        </div>
+    </div>
+</body>
+
+</html>
