@@ -36,6 +36,12 @@ public class APIController {
         return apiService.classifyImagesBatch(imageFiles, model);
     }
 
+    @PostMapping("/images/face-detect")
+    @ResponseBody
+    public GenericResponse faceDetect(@RequestParam("model") String model, @RequestParam("image") MultipartFile imageFile) {
+        log.info("Received face detect request: model={} image={}", model, imageFile.getOriginalFilename());
+        return apiService.faceDetect(imageFile, model);
+    }
 
     @GetMapping("/dummy")
     @ResponseBody

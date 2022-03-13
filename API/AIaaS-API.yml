@@ -64,6 +64,34 @@ paths:
                 $ref: '#/components/schemas/ImageBatchClassifyResponse'
         '500':
           description: ERROR
+  /images/face-detect:
+    post:
+      parameters:
+        - in: query
+          name: model
+          schema:
+            type: string
+          required: true
+          description: Model name
+          example: densebox_320_320
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FaceDetectResponse'
+        '500':
+          description: ERROR
 components:
   schemas:
     ImageClassifyResponse:
@@ -115,6 +143,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ImageClassifyItem'
-
-
-
+    FaceDetectResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            results:
+              description: List of faces detected.
+              type: array
+              items:
+                $ref: '#/components/schemas/FaceDetectItem'
+    FaceDetectItem:
+      type: object
+      properties:
+        x:
+          type: number
+          example: 10
+          description: X position of the rectangle
+        y:
+          type: number
+          example: 10
+          description: Y position of the rectangle
+        width:
+          type: number
+          example: 100
+          description: Width of the rectangle
+        height:
+          type: number
+          example: 100
+          description: Height of the rectangle
+        score:
+          type: number
+          example: 0.98
+          description: Result confidence/score.

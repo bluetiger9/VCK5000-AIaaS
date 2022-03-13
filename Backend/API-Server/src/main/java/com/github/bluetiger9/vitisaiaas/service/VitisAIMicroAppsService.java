@@ -35,7 +35,11 @@ public class VitisAIMicroAppsService {
 
         IMAGE_CLASSIFY_BATCH(
                 "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_image_classify_batch",
-                "%model%", "%images%");
+                "%model%", "%images%"),
+
+        FACE_DETECT(
+                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_face_detect",
+                "%model%", "%image%"),
         ;
 
         private final List<String> args;

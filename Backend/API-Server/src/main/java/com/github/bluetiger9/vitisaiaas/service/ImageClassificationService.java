@@ -27,7 +27,7 @@ public class ImageClassificationService {
 
     public Object classifyImage(String model, Path tempImagePath) {
         try {
-            final Future<String> result = vitisAIMicroApps.run(MicroApp.IMAGE_CLASSIFY/* _DUMMY */,
+            final Future<String> result = vitisAIMicroApps.run(MicroApp.IMAGE_CLASSIFY,
                     Map.of(Parameter.IMAGE, tempImagePath.toString(), Parameter.MODEL, model));
 
             final Object resObj = objectMapper.readValue(result.get(), Object.class);
@@ -48,6 +48,21 @@ public class ImageClassificationService {
 
             final Future<String> result = vitisAIMicroApps.run(MicroApp.IMAGE_CLASSIFY_BATCH,
                     Map.of(Parameter.IMAGES, pathList, Parameter.MODEL, model));
+
+            final Object resObj = objectMapper.readValue(result.get(), Object.class);
+
+            log.info("MicroApp result: {}", resObj);
+            return resObj;
+
+        } catch (InterruptedException | ExecutionException | JsonProcessingException e) {
+            throw new RuntimeException("action failed", e);
+        }
+    }
+
+    public Object faceDetect(String model, Path tempImagePath) {
+        try {
+            final Future<String> result = vitisAIMicroApps.run(MicroApp.FACE_DETECT,
+                    Map.of(Parameter.IMAGE, tempImagePath.toString(), Parameter.MODEL, model));
 
             final Object resObj = objectMapper.readValue(result.get(), Object.class);
 
