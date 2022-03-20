@@ -92,6 +92,34 @@ paths:
                 $ref: '#/components/schemas/FaceDetectResponse'
         '500':
           description: ERROR
+  /images/lane-detect:
+    post:
+      parameters:
+        - in: query
+          name: model
+          schema:
+            type: string
+          required: true
+          description: Model name
+          example: vpgnet_pruned_0_99
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LaneDetectResponse'
+        '500':
+          description: ERROR
 components:
   schemas:
     ImageClassifyResponse:
@@ -177,3 +205,34 @@ components:
           type: number
           example: 0.98
           description: Result confidence/score.
+    LaneDetectResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            results:
+              description: List of lanes detected.
+              type: array
+              items:
+                $ref: '#/components/schemas/LaneDetectItem'
+    LaneDetectItem:
+      type: object
+      description: A lane line
+      properties:
+        type:
+          type: number
+          example: 1
+          description: Line type
+        points:
+          type: array          
+          description: Points in the line.
+          items:
+            type: object
+            properties:
+              x:
+                type: number
+                description: X coordinate
+              y:
+                type: number
+                description: Y coordinate

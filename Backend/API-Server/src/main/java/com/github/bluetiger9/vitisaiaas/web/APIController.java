@@ -43,6 +43,13 @@ public class APIController {
         return apiService.faceDetect(imageFile, model);
     }
 
+    @PostMapping("/images/lane-detect")
+    @ResponseBody
+    public GenericResponse laneDetect(@RequestParam("model") String model, @RequestParam("image") MultipartFile imageFile) {
+        log.info("Received lane detect request: model={} image={}", model, imageFile.getOriginalFilename());
+        return apiService.laneDetect(imageFile, model);
+    }
+
     @GetMapping("/dummy")
     @ResponseBody
     public GenericResponse dummyAction(@RequestParam String text) {

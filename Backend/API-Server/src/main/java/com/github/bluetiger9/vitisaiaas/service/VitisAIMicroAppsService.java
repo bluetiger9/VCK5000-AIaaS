@@ -40,6 +40,10 @@ public class VitisAIMicroAppsService {
         FACE_DETECT(
                 "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_face_detect",
                 "%model%", "%image%"),
+
+        LANE_DETECT(
+                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_lane_detect",
+                "%model%", "%image%"),
         ;
 
         private final List<String> args;

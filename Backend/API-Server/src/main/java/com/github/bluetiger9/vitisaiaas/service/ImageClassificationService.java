@@ -73,4 +73,19 @@ public class ImageClassificationService {
             throw new RuntimeException("action failed", e);
         }
     }
+
+    public Object laneDetect(String model, Path tempImagePath) {
+        try {
+            final Future<String> result = vitisAIMicroApps.run(MicroApp.LANE_DETECT,
+                    Map.of(Parameter.IMAGE, tempImagePath.toString(), Parameter.MODEL, model));
+
+            final Object resObj = objectMapper.readValue(result.get(), Object.class);
+
+            log.info("MicroApp result: {}", resObj);
+            return resObj;
+
+        } catch (InterruptedException | ExecutionException | JsonProcessingException e) {
+            throw new RuntimeException("action failed", e);
+        }
+    }
 }

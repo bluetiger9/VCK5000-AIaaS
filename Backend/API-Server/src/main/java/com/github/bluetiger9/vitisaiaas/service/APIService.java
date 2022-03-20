@@ -96,6 +96,24 @@ public class APIService {
         });
     }
 
+    public GenericResponse laneDetect(MultipartFile imageFile, String model) {
+        final Task task = Task.builder()
+                .id(taskId())
+                .type("lane-detect")
+                .attributes(Map.of("model", model, "image", imageFile.getOriginalFilename()))
+                .build();
+
+        return runTask(task, tempDir -> {
+            final Path tempImagePath = tempDir.getPath().resolve("image." + getFileExtension(imageFile, "jpg"));
+
+            log.info("Image path: {}", tempImagePath.toAbsolutePath());
+            imageFile.transferTo(tempImagePath);
+
+            final Object result = imageClassificationService.laneDetect(model, tempImagePath);
+            return new GenericResponse(result);
+        });
+    }
+
     public GenericResponse dummyAction(String text) {
         final Task task = Task.builder()
                 .id(taskId())
