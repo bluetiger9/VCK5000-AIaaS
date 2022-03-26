@@ -31,6 +31,8 @@ import lombok.extern.slf4j.Slf4j;
 public class APIService {
 
     private final ImageClassificationService imageClassificationService;
+    private final VideoClassificationService videoClassificationService;
+
     private final List<Task> taskHistory = new CopyOnWriteArrayList<>();
 
     public List<Task> getTaskHistory() {
@@ -110,6 +112,24 @@ public class APIService {
             imageFile.transferTo(tempImagePath);
 
             final Object result = imageClassificationService.laneDetect(model, tempImagePath);
+            return new GenericResponse(result);
+        });
+    }
+
+    public GenericResponse yoloV3VideoDetect(MultipartFile videoFile, String model) {
+        final Task task = Task.builder()
+                .id(taskId())
+                .type("yolo-v3-video-detect")
+                .attributes(Map.of("model", model, "video", videoFile.getOriginalFilename()))
+                .build();
+
+        return runTask(task, tempDir -> {
+            final Path tempVideoPath = tempDir.getPath().resolve("video." + getFileExtension(videoFile, "mp4"));
+
+            log.info("Video path: {}", tempVideoPath.toAbsolutePath());
+            videoFile.transferTo(tempVideoPath);
+
+            final Object result = videoClassificationService.yoloV3Detect(model, tempVideoPath);
             return new GenericResponse(result);
         });
     }

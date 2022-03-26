@@ -44,6 +44,10 @@ public class VitisAIMicroAppsService {
         LANE_DETECT(
                 "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_lane_detect",
                 "%model%", "%image%"),
+
+        VIDEO_YOLO_V3(
+                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_yolo3_video",
+                "%model%", "%video%"),
         ;
 
         private final List<String> args;
@@ -89,7 +93,9 @@ public class VitisAIMicroAppsService {
     public static enum Parameter {
         MODEL("%model%", false),
         IMAGE("%image%", false),
-        IMAGES("%images%", true);
+        IMAGES("%images%", true),
+        VIDEO("%video%", false),
+        ;
 
         private final String pattern;
         private final boolean multi;

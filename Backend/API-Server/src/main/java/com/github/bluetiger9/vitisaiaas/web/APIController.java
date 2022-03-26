@@ -50,6 +50,13 @@ public class APIController {
         return apiService.laneDetect(imageFile, model);
     }
 
+    @PostMapping("/videos/yolo-v3")
+    @ResponseBody
+    public GenericResponse yoloV3DetectVideo(@RequestParam("model") String model, @RequestParam("video") MultipartFile videoFile) {
+        log.info("Received YOLO V3 Video request: model={} image={}", model, videoFile.getOriginalFilename());
+        return apiService.yoloV3VideoDetect(videoFile, model);
+    }
+
     @GetMapping("/dummy")
     @ResponseBody
     public GenericResponse dummyAction(@RequestParam String text) {

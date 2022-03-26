@@ -28,6 +28,7 @@ for file in $(ls *.cpp); do
 	filename=${file%.*}
 	$CXX -std=c++17 -O2 -I. ${DEBUG_FLAGS} -o ${filename} ${file} \
 		-lvitis_ai_library-classification -lvitis_ai_library-facedetect -lvitis_ai_library-lanedetect \
+		-lvitis_ai_library-yolov3 \
 		-lvitis_ai_library-dpu_task -lvitis_ai_library-xnnpp -lvitis_ai_library-model_config -lvitis_ai_library-math \
 		-lvart-util -lxir -pthread -ljson-c -lglog ${OPENCV_FLAGS} \
 		-lopencv_core -lopencv_videoio -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui

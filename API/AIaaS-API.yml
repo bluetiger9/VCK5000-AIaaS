@@ -6,6 +6,7 @@ servers:
   - url: http://x570-test.local:8080/api/v1/
   - url: http://localhost:8080/api/v1/
 paths:
+  # Image API-s:
   /images/classify:
     post:
       parameters:
@@ -120,8 +121,40 @@ paths:
                 $ref: '#/components/schemas/LaneDetectResponse'
         '500':
           description: ERROR
+
+  # Video API-s:
+  /videos/yolo-v3:
+    post:
+      parameters:
+        - in: query
+          name: model
+          schema:
+            type: string
+          required: true
+          description: Model name
+          example: yolov3_adas_pruned_0_9
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                video:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YoloV3VideoResponse'
+        '500':
+          description: ERROR
+
 components:
   schemas:
+    # Response Types:
     ImageClassifyResponse:
       type: object
       properties:
@@ -182,6 +215,18 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/FaceDetectItem'
+    YoloV3VideoResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            frames:
+              description: List of frames with detection results.
+              type: array
+              items:
+                $ref: '#/components/schemas/YoloV3FrameItem'
+    # Data Types:
     FaceDetectItem:
       type: object
       properties:
@@ -225,7 +270,7 @@ components:
           example: 1
           description: Line type
         points:
-          type: array          
+          type: array
           description: Points in the line.
           items:
             type: object
@@ -236,3 +281,32 @@ components:
               y:
                 type: number
                 description: Y coordinate
+    YoloV3FrameItem:
+      type: object
+      description: Yolo V3 Frame result
+      properties:
+        frame:
+          type: number
+          example: 1
+          description: Frame number
+        bboxes:
+          type: array
+          description: Bounding boxes with detected object.
+          items:
+            type: object
+            properties:
+              label:
+                type: number
+                description: Label number
+              x:
+                type: number
+                description: X coordinate
+              y:
+                type: number
+                description: Y coordinate
+              width:
+                type: number
+                description: Width
+              height:
+                type: number
+                description: Height

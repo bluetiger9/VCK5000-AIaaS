@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     return -1;
   }
 
-  LOG(INFO) << "Vitis AI Image Classify MicroApp" << std::endl;;
+  LOG(INFO) << "Vitis AI Lane Detect MicroApp" << std::endl;;
   std::string model = argv[1];
   std::string image_path = argv[2];
 
