@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+*.jar
+
+# OpenAPI Generator
+*openapi*

@@ -354,6 +354,6 @@ int main(int argc, char *argv[])
 #else
   // dummy results mode
   Dummy results not implemented for video...
-  
+
 #endif
 }

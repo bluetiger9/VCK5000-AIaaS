@@ -9,6 +9,8 @@ paths:
   # Image API-s:
   /images/classify:
     post:
+      tags:
+        - Images
       parameters:
         - in: query
           name: model
@@ -37,6 +39,8 @@ paths:
           description: ERROR
   /images/classify/batch:
     post:
+      tags:
+        - Images
       parameters:
         - in: query
           name: model
@@ -67,6 +71,8 @@ paths:
           description: ERROR
   /images/face-detect:
     post:
+      tags:
+        - Images
       parameters:
         - in: query
           name: model
@@ -95,6 +101,8 @@ paths:
           description: ERROR
   /images/lane-detect:
     post:
+      tags:
+        - Images
       parameters:
         - in: query
           name: model
@@ -125,6 +133,8 @@ paths:
   # Video API-s:
   /videos/yolo-v3:
     post:
+      tags:
+        - Videos
       parameters:
         - in: query
           name: model
