@@ -38,15 +38,15 @@ public class VitisAIMicroAppsService {
                 "%model%", "%images%"),
 
         FACE_DETECT(
-                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_face_detect",
+                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_image_face_detect",
                 "%model%", "%image%"),
 
         LANE_DETECT(
-                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_lane_detect",
+                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_image_lane_detect",
                 "%model%", "%image%"),
 
         VIDEO_YOLO_V3(
-                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_yolo3_video",
+                "/workspace/demo/Vitis-AI-Library/samples/VitisAI-MicroApps/vitis_ai_video_yolov3",
                 "%model%", "%video%"),
         ;
 
