@@ -162,7 +162,7 @@ pc-ble-driver-py==0.15.0
 pexpect==4.6.0
 piccata==2.0.1
 pickleshare==0.7.5
-Pillow==7.0.0
+Pillow==9.3.0
 platformdirs==2.4.1
 pluggy==0.13.1
 ply==3.11
