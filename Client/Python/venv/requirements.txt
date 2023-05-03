@@ -183,7 +183,7 @@ pyds==0.2.0
 pyelftools==0.27
 Pygments==2.8.1
 PyGObject==3.36.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 pykwalify==1.8.0
 pylink-square==0.10.0
 pylint==2.8.3
