@@ -65,7 +65,7 @@ filelock==3.4.2
 Flask==2.2.5
 Flask-Cors==3.0.10
 Flask-WTF==0.14.3
-future==0.18.2
+future==0.18.3
 gcovr==5.0
 gitlint==0.15.1
 html5lib==1.0.1
