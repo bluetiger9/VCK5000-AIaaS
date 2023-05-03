@@ -62,7 +62,7 @@ entrypoints==0.3
 enum34==1.1.10
 fasteners==0.14.1
 filelock==3.4.2
-Flask==1.1.2
+Flask==2.2.5
 Flask-Cors==3.0.10
 Flask-WTF==0.14.3
 future==0.18.2
