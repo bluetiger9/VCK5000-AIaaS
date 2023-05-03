@@ -36,7 +36,7 @@ cmdtest==0.32+git
 cmsis-pack-manager==0.2.10
 colorama==0.4.3
 command-not-found==0.3
-cookiecutter==1.7.2
+cookiecutter==2.1.1
 cookiejar==0.0.2
 coverage==5.5
 crcmod==1.7
