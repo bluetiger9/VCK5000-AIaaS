@@ -40,7 +40,7 @@ cookiecutter==2.1.1
 cookiejar==0.0.2
 coverage==5.5
 crcmod==1.7
-cryptography==39.0.1
+cryptography==42.0.4
 cupshelpers==1.0
 cycler==0.10.0
 Cython==0.29.22
