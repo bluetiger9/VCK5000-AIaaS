@@ -6,17 +6,19 @@
 package com.github.bluetiger9.vitisaiaas;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration;
+import org.springframework.boot.security.autoconfigure.actuate.web.servlet.ManagementWebSecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
 
 @SpringBootApplication(exclude = {
-        SecurityAutoConfiguration.class,
         ManagementWebSecurityAutoConfiguration.class,
         MongoAutoConfiguration.class,
-        MongoDataAutoConfiguration.class
 })
 public class VitisAIasAServiceApplication {
 
@@ -26,13 +28,16 @@ public class VitisAIasAServiceApplication {
 		SpringApplication.run(VitisAIasAServiceApplication.class, args);
 	}
 
-//	@Configuration
-//	@EnableWebSecurity
-//	public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-//		@Override
-//		protected void configure(HttpSecurity http) throws Exception {
-//			http.authorizeRequests().antMatchers("/").permitAll();
-//		}
-//	}
+	@Configuration
+	@EnableWebSecurity
+	public static class SecurityConfiguration {
+
+	    @Bean
+	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	        return http.csrf(AbstractHttpConfigurer::disable)
+	            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+	            .build();
+	    }
+	}
 
 }

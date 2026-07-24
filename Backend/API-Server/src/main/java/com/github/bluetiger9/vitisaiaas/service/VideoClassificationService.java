@@ -12,12 +12,12 @@ import java.util.concurrent.Future;
 
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bluetiger9.vitisaiaas.service.VitisAIMicroAppsService.MicroApp;
 import com.github.bluetiger9.vitisaiaas.service.VitisAIMicroAppsService.Parameter;
 
 import lombok.AllArgsConstructor;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 @Service
 @AllArgsConstructor
@@ -33,7 +33,7 @@ public class VideoClassificationService {
 
             return objectMapper.readValue(result.get(), Object.class);
 
-        } catch (InterruptedException | ExecutionException | JsonProcessingException e) {
+        } catch (InterruptedException | ExecutionException | JacksonException e) {
             throw new RuntimeException("action failed", e);
         }
     }
